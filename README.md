@@ -8,7 +8,7 @@ Make sure you have a C99 complient compiler available — then call the build sc
 
 For instance, on Karolina: `./build.sh karolina`
 
-## Architecture specific scripts
+## Supported HPC Architectures
 We provided different configuration files for some HPC architectures — these all reside in `slurm/*`
 
 We currenly provide scripts for the following HPC architectures:
