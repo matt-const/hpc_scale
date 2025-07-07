@@ -5,6 +5,9 @@
 # $License: You may use, distribute and modify this code under the terms of the MIT license.
 # $Note: Build script.
 
+# NOTE(cmat): Load appropriate modules.
+eval(". ./hpc_config/module_${1}".sh)
+
 mkdir -p build
 pushd build > /dev/null
 

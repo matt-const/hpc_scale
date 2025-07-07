@@ -13,6 +13,8 @@ node_counts=(1 2 4)
 slurm_script=$1
 slurm_executable=$2
 
+slurm_script="./hpc_config/slurm_${1}.sh"
+
 for index in "${node_counts[@]}"; do
     sbatch \
         --job-name=hpc_scale_bench_${index} \
@@ -20,5 +22,5 @@ for index in "${node_counts[@]}"; do
         --nodes=${index} \
         --output=bench_stdout_${n}.out \
         --output=bench_stderr_${n}.err \
-        ./hpc_config/slurm_karolina_cpu.sh ./build/hpc_scale
+        $slurm_script ./build/hpc_scale
 done
