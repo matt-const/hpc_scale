@@ -1,5 +1,5 @@
 // $File: hpc_scale.c
-// $Last-Modified: "2025-07-07 16:28:01"
+// $Last-Modified: "2025-07-07 16:37:34"
 // $Author: Matyas Constans.
 // $Notice: (C) Matyas Constans 2024 - All Rights Reserved.
 // $License: You may use, distribute and modify this code under the terms of the MIT license.
@@ -9,6 +9,8 @@
 #include <pthread.h>
 #include <mpi.h>
 #include <numa.h>
+#include <stdio.h>
+#include <string.h>
 
 int main(int argc, char **argv) {
   
@@ -20,14 +22,7 @@ int main(int argc, char **argv) {
   int mpi_rank = 0;
   int mpi_size = 0;
   MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
-  MPI_Comm_Size(MPI_COMM_WORLD, &mpi_size);
-
-  // NOTE(cmat): Get the number of physical cores for this process
-  // #--
-  hwloc_topology_t hw_topology = {};
-  hwloc_topology_init(&hw_topology);
-  hwloc_topology_load(hw_topology);
-  int num_physical_cores = hwloc_get_nbobjs_by_type(hw_topology, HWLOC_OBJ_CORE);
+  MPI_Comm_size(MPI_COMM_WORLD, &mpi_size);
 
   // NOTE(cmat): Get information about NUMA nodes. (Non-Uniform Memory Access).
   // #--
