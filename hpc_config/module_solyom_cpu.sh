@@ -6,5 +6,4 @@
 # $License: You may use, distribute and modify this code under the terms of the MIT license.
 # $Note: Karolina specific modules to load, for running on CPU nodes.
 
-module load OpenMPI/4.1.5-GCC-12.3
-module load GCC/12.3.0
+module load openmpi/4.1.2

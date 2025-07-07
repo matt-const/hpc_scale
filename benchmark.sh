@@ -15,12 +15,14 @@ slurm_executable=$2
 
 slurm_script="./hpc_config/slurm_${1}.sh"
 
+mkdir -p log_files > /dev/null
+
 for index in "${node_counts[@]}"; do
     sbatch \
         --job-name=hpc_scale_bench_${index} \
         --time=${wall_time} \
         --nodes=${index} \
-        --output=bench_stdout_${index}.out \
-        --output=bench_stderr_${index}.err \
+        --output=log_files/bench_stdout_${index}.out \
+        --output=log_files/bench_stderr_${index}.err \
         $slurm_script ./build/hpc_scale
 done
