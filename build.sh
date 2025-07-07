@@ -9,9 +9,9 @@ mkdir -p build
 pushd build > /dev/null
 
 compiler="-O3 -pthread"
-linker="-o hpc_scahttps://github.com/matt-const/hpc_scale.gitle -lnuma"
+linker="-o hpc_scale -lnuma"
 source="../src/hs_entry.c"
 
 mpicc $compiler $source $linker
 
-popd build > /dev/null
+popd > /dev/null
