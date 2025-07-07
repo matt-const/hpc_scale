@@ -4,11 +4,9 @@ This project contains a series of samples using MPI + pthreads (hybrid MPI),
 for testing scaling on HPC architectures at very large node and core numbers.
 
 ## Build instructions
-Make sure you have a C99 complient compiler available — then call the build script with either `debug` or `release`.
+Make sure you have a C99 complient compiler available — then call the build script for your architecture of choice.
 
-`./build.sh debug`
-or 
-`./build.sh release`
+For instance, on Karolina: `./build.sh karolina`
 
 ## Architecture specific scripts
 We provided different configuration files for some HPC architectures — these all reside in `slurm/*`
