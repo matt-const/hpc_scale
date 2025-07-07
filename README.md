@@ -20,3 +20,4 @@ We provided different configuration files for some HPC architectures — these a
 We currenly provide scripts for the following HPC architectures:
 
 - [Karolina](https://www.it4i.cz/en/infrastructure/karolina)
+- [Solyom (our local university cluster)](uni.sze.hu)
