@@ -12,10 +12,10 @@
 #SBATCH --partition=compute
 
 # NOTE(cmat): We want 8 MPI processes per node.
-#SBATCH --ntasks-per-node=1
+#SBATCH --ntasks-per-node=2
 
 # NOTE(cmat): Physical cores per mpi processes -- corresponds to one NUMA node.
-#SBATCH --cpus-per-task=32
+#SBATCH --cpus-per-task=16
 
 # NOTE(cmat): Make sure we're actually using the nodes exclusively,
 # - nothing else should be running while we're running.

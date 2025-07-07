@@ -39,14 +39,11 @@ int main(int argc, char **argv) {
   // NOTE(cmat): Log all this information
   // #--
   char *job_name = getenv("SLURM_JOB_NAME"); 
-  FILE *out = fopen(job_name, "a");
 
   char buffer[512];
   snprintf(buffer, 512, "Rank :: %d, Size :: %d, NUMA Node Count :: %d, Physical Core Count :: %d, :: Thread Count :: %d\n",
            mpi_rank, mpi_size, numa_node_count, physical_core_count, thread_count);
 
-  fwrite(buffer, strlen(buffer), 1, out);
-  fclose(out);
-  
+  printf("%s", buffer); 
   MPI_Finalize();
 }

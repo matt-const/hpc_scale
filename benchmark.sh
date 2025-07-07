@@ -8,14 +8,11 @@
 # - then computes scalability based on the results of the runs.
 
 wall_time="01:00:00"
-node_counts=(1 2 4)
-
-slurm_script=$1
-slurm_executable=$2
-
+node_counts=(1 2 4 8 12)
 slurm_script="./hpc_config/slurm_${1}.sh"
 
-mkdir -p log_files > /dev/null
+rm -r log_files
+mkdir log_files
 
 for index in "${node_counts[@]}"; do
     sbatch \
@@ -23,6 +20,6 @@ for index in "${node_counts[@]}"; do
         --time=${wall_time} \
         --nodes=${index} \
         --output=log_files/bench_stdout_${index}.out \
-        --output=log_files/bench_stderr_${index}.err \
+        --error=log_files/bench_stderr_${index}.out \
         $slurm_script ./build/hpc_scale
 done
