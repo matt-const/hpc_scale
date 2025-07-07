@@ -8,8 +8,8 @@ Make sure you have a C99 complient compiler available — then call the build sc
 
 `./build.sh release`
 
-## HPC Specific scripts
-Different HPC architectures have different configurations.
+## Architecture specific scripts
+We provided different configuration files for some HPC architectures; these all reside in `slurm/*`
 We currenly provide scripts for the following HPC architectures.
 
 - [Karolina](https://www.it4i.cz/en/infrastructure/karolina)
