@@ -6,7 +6,7 @@
 # $Note: Build script.
 
 # NOTE(cmat): Load appropriate modules.
-eval(". ./hpc_config/module_${1}".sh)
+. ./hpc_config/module_"${1}".sh
 
 mkdir -p build
 pushd build > /dev/null

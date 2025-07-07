@@ -20,7 +20,7 @@ for index in "${node_counts[@]}"; do
         --job-name=hpc_scale_bench_${index} \
         --time=${wall_time} \
         --nodes=${index} \
-        --output=bench_stdout_${n}.out \
-        --output=bench_stderr_${n}.err \
+        --output=bench_stdout_${index}.out \
+        --output=bench_stderr_${index}.err \
         $slurm_script ./build/hpc_scale
 done
