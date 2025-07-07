@@ -8,8 +8,8 @@
 mkdir -p build
 pushd build > /dev/null
 
-compiler="-O3 -pthread -I{$HWLOC_ROOT}/include"
-linker="-o hpc_scale -L{$HWLOC_ROOT}/lib -lhwloc"
+compiler="-O3 -pthread"
+linker="-o hpc_scale -lnuma"
 source="../src/hpc_scale.c"
 
 mpicc $compiler $source $linker
