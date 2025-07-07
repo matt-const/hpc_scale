@@ -7,6 +7,9 @@
 # $Note: Karolina specific SLURM configuration values. This gets called by the main slurm file
 # and only handles specific things for the Karolina architecture.
 
+# NOTE(cmat): Account number.
+#SBATCH --account=DD-24-18
+
 # NOTE(cmat): For CPU tasks, we run on the long 'qcpu' partition.
 #SBATCH --partition=qcpu
 
@@ -33,9 +36,7 @@
 #SBATCH --distribution=block:cyclic
 
 # NOTE(cmat): Load modules.
-module load OpenMPI/4.1.5-GCC-12.3
-module load GCC/12.3.0
-module load hwloc/2.9.1-GCCcore-12.3.0
+. ./module_karolina_cpu.sh
 
 # NOTE(cmat): Change to command submission directory.
 cd $SLURM_SUBMIT_DIR
