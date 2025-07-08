@@ -45,4 +45,5 @@ cd $SLURM_SUBMIT_DIR
 export OMPI_MCA_btl=^openib
 
 # NOTE(cmat): Launch executable with slurm + MPI.
+export MPI_PER_NODE=8
 srun --mpi=pmix --cpu-bind=cores numactl --cpunodebind=$((SLURM_LOCALID / 2)) --membind=$((SLURM_LOCAL_ID/2)) ${1}

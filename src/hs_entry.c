@@ -1,5 +1,5 @@
 // $File: hpc_scale.c
-// $Last-Modified: "2025-07-07 16:37:34"
+// $Last-Modified: "2025-07-08 12:40:07"
 // $Author: Matyas Constans.
 // $Notice: (C) Matyas Constans 2024 - All Rights Reserved.
 // $License: You may use, distribute and modify this code under the terms of the MIT license.
@@ -28,22 +28,53 @@ int main(int argc, char **argv) {
   // #--
   int numa_node_count     = 0;
   int physical_core_count = 0;
-  int thread_count        = 0;
+  int cores_per_numa_node = 0;
 
   if (numa_available() >= 0) {
     numa_node_count     = numa_max_node() + 1;
     physical_core_count = numa_num_configured_cpus();
-    thread_count = physical_core_count / numa_node_count;
+    cores_per_numa_node = physical_core_count / numa_node_count;
+  } else {
+    numa_node_count     = -1;
+    physical_core_count = -1;
+    cores_per_numa_node = -1;
   }
 
-  // NOTE(cmat): Log all this information
+  int tasks_per_node = -1;
+  char *env_tasks_per_node = getenv("MPI_PER_NODE");
+  if (env_tasks_per_node) {
+    tasks_per_node = atoi(tasks_per_node);
+  }
+
+  int local_node_rank       = mpi_rank % tasks_per_node;
+  int local_node_numa_index = local_node_rank % numa_node_count;
+  int base_core_index       = local_node_numa_index * cores_per_numa_node;
+
+  // NOTE(cmat): Log all info.
   // #--
-  char *job_name = getenv("SLURM_JOB_NAME"); 
+  fprintf(stdout,
+          "Rank :: %d\n"
+          "  Physical Core Count    :: %d\n"
+          "  NUMA Node Count        :: %d\n"
+          "  Core Count / NUMA Node :: %d\n"
+          "  MPI process / Node     :: %d\n"
+          "  Local Node Rank        :: %d\n"
+          "  Local Node NUMA Rank   :: %d\n"
+          "  Base Thread Core Index :: %d\n",
 
-  char buffer[512];
-  snprintf(buffer, 512, "Rank :: %d, Size :: %d, NUMA Node Count :: %d, Physical Core Count :: %d, :: Thread Count :: %d\n",
-           mpi_rank, mpi_size, numa_node_count, physical_core_count, thread_count);
+          mpi_rank,
+          physical_core_count,
+          numa_node_count,
+          cores_per_numa_node,
+          tasks_per_node,
+          local_node_rank,
+          local_node_numa_index,
+          base_core_index
+          )
+  
+  mpi_rank, mpi_size, numa_node_count, physical_core_count, thread_count);
 
-  printf("%s", buffer); 
+  
   MPI_Finalize();
 }
+
