@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
   int tasks_per_node = -1;
   char *env_tasks_per_node = getenv("MPI_PER_NODE");
   if (env_tasks_per_node) {
-    tasks_per_node = atoi(tasks_per_node);
+    tasks_per_node = atoi(env_tasks_per_node);
   }
 
   int local_node_rank       = mpi_rank % tasks_per_node;
@@ -70,11 +70,8 @@ int main(int argc, char **argv) {
           local_node_rank,
           local_node_numa_index,
           base_core_index
-          )
-  
-  mpi_rank, mpi_size, numa_node_count, physical_core_count, thread_count);
+          );
 
-  
   MPI_Finalize();
 }
 
