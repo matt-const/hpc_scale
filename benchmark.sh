@@ -9,7 +9,7 @@
 
 wall_time="01:00:00"
 node_counts=(1 2 4 8 12)
-slurm_script="./hpc_config/slurm_${1}.sh"
+slurm_script="./hpc/slurm_${1}.sh"
 
 rm -r log_files
 mkdir log_files
